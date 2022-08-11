@@ -2,7 +2,7 @@
 .container{
     display: flex;
     justify-content: space-between;
-    margin: 0rem 6.4rem;
+    margin: 1rem 6.4rem;
 }
 
 nav{
@@ -16,7 +16,7 @@ p{
 }
 
 .logo{
-    height: 6.0rem;
+    height: 5.0rem;
 }
 .logo img{
     height: 100%;
