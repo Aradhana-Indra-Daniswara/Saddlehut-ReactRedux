@@ -1,11 +1,9 @@
 import React from 'react';
 import saddlehut_icon from '../../assets/img/Saddlehut_icon.svg'
 import saddlehut_logo from '../../assets/img/Saddlehut_logo.svg'
-// CSS
 import './navbar.css';
 
-
-const Navbar = () => {
+function Navbar() {
     return (
         <div className="container">
             <div className="logo">
