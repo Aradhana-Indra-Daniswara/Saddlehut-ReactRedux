@@ -1,30 +1,29 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts, selectAllPosts } from '../../features/counter/posts/postsSlice';
-import { PostCard } from '../PostCard/postcard';
+import { PostCard } from '../PostCard/Postcard';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
+import { CreateButton } from '../Button/ButtonStyles';
+import plus_icon from '../../assets/img/plus_icon.svg'
 
 function Home() {
     const dispatch = useDispatch();
-    // const posts = filterPostsWithImage();
     const posts = useSelector(selectAllPosts)
-
-    // function filterPostsWithImage(){
-    //     return posts.filter(post => {
-
-    //     })
-    // }
     useEffect(() => {
         dispatch(fetchPosts());
     }, [dispatch])
     return (
         <div className="container" css={style.container}>
+            <CreateButton css={style.createbutton}>
+                <img src={plus_icon} alt="" />
+                <p>Create Post</p>
+            </CreateButton>
             {
                 posts.map((post) => {
                     const title = post.data.title.slice(0, 50);
                     let preview = null;
-                    if(post.data.preview){
+                    if (post.data.preview) {
                         const previewImage = post.data.preview.images[0].source.url;
                         preview = previewImage.replaceAll('&amp;', '&')
                         console.log(preview)
@@ -48,8 +47,12 @@ const style = {
     container: css`
         display: flex;
         flex-direction: column;
-        align-items: center;
         gap: 2.4rem;
+        width: min-content;
+        margin: auto auto;
+    `,
+    createbutton: css`
+        width: max-content;
     `
 }
 export default Home;

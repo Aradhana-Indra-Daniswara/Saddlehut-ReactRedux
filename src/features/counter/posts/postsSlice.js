@@ -9,7 +9,7 @@ export const fetchPosts = createAsyncThunk(
             return response;
             
         }catch(error){
-            // console.log(error)
+            console.log(error)
         }
     }
 )
