@@ -38,7 +38,6 @@ export function PostCard(props) {
                             <img src={comments_icon} alt="" />
                             <p>{0 || commentsAmount} Comments</p>
                         </div>
-
                     </NavLink>
                 </div>
             </div>
