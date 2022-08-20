@@ -7,8 +7,14 @@ import { css } from '@emotion/react'
 
 function Home() {
     const dispatch = useDispatch();
-    const posts = useSelector(selectAllPosts);
+    // const posts = filterPostsWithImage();
+    const posts = useSelector(selectAllPosts)
 
+    // function filterPostsWithImage(){
+    //     return posts.filter(post => {
+
+    //     })
+    // }
     useEffect(() => {
         dispatch(fetchPosts());
     }, [dispatch])
@@ -17,7 +23,15 @@ function Home() {
             {
                 posts.map((post) => {
                     const title = post.data.title.slice(0, 50);
+                    let preview = null;
+                    if(post.data.preview){
+                        const previewImage = post.data.preview.images[0].source.url;
+                        preview = previewImage.replaceAll('&amp;', '&')
+                        console.log(preview)
+                    }
+
                     return <PostCard
+                        thumbnail={preview}
                         title={title + '...'}
                         author={post.data.author}
                         upvotes={post.data.ups - post.data.downs}
