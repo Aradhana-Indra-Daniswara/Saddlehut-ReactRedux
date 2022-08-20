@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts, selectAllPosts } from '../../features/counter/posts/postsSlice';
 import { PostCard } from '../PostCard/postcard';
+
 function Home() {
     const dispatch = useDispatch();
     const posts = useSelector(selectAllPosts);

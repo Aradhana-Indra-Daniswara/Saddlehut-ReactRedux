@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { fetchFromRedditAPI } from "../../../API/redditAPI";
 export const fetchPosts = createAsyncThunk(
     'posts/fetchPosts',
     async (arg, thunkAPI) => {
         try{
-            const response = await fetch('https://www.reddit.com/r/Minecraft.json');
-            const json = await response.json();
-            return json.data.children;
+            const response = await fetchFromRedditAPI();
+            return response;
             
         }catch(error){
             // console.log(error)
