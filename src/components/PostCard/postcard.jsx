@@ -48,10 +48,12 @@ export function PostCard(props) {
 
 const style = {
     container: css`
-        width: 42.5rem;
-        border: 1px solid black;
+        width: 72.5rem;
+        border: 0.5px solid black;
+        overflow: hidden;
         h1{
             font-size: 2.8rem;
+            width: 100%;
         }
         & > img{
             width: 100%;
@@ -66,6 +68,7 @@ const style = {
     `,
     author: css`
         color: #4F87CE;
+        margin-top: 0.8rem;
     `,
     interactions: css`
         display: flex;
