@@ -1,61 +1,48 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
+import { allPostsLoaded } from '../../features/posts/postsSlice';
 import { useParams } from 'react-router-dom'
-import { selectAllPosts } from '../../features/posts/postsSlice';
 import { fetchPosts } from '../../features/posts/postsSlice';
 import upvote_icon from "../../assets/img/upvote.svg";
 import downvote_icon from "../../assets/img/downvote.svg";
-import { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import MarkdownView from 'react-showdown';
-function Post() {
+function Post({ posts }) {
   const { postId } = useParams();
   const dispatch = useDispatch();
-  const selectedPost = useSelector(state => {
-    const filterById = state.posts.posts.find(post => {
-      if (post.data.id === postId) {
-        return post.data
-      }
-    })
-    return filterById.data;
-  })
-  const [upvotes, setUpvotes] = useState(selectedPost.ups-selectedPost.downs || 0);
-  const upvote = () => {
-    setUpvotes((prev) => prev + 1);
+  let postIsLoaded = useSelector(allPostsLoaded);
+  if (!postIsLoaded) {
+    dispatch(fetchPosts());
+    return (
+      <h1>Loading...</h1>
+    )
   }
-  const downvote = () => {
-    setUpvotes((prev) => prev - 1);
-  }
+  // Find Post
   let preview = null;
-  if (selectedPost.preview) {
+  const selectedPost = posts.find(post => post.data.id === postId).data
+  if (selectedPost.preview != undefined) {
     const previewImage = selectedPost.preview.images[0].source.url;
     preview = previewImage.replaceAll('&amp;', '&')
   }
-
-  useEffect(() => {
-    if (!selectedPost.length) {
-      dispatch(fetchPosts());
-    }
-  }, [dispatch])
 
   return (
     <div className="container" css={style.container}>
       <div className="post" css={style.post}>
         <div className="upvotes" css={style.upvotes}>
-          <img src={upvote_icon} alt="" onClick={upvote} />
-          <p>{upvotes}</p>
-          <img src={downvote_icon} alt="" onClick={downvote} />
+          <img src={upvote_icon} alt="" />
+          <p>{selectedPost.ups - selectedPost.downs}</p>
+          <img src={downvote_icon} alt="" />
         </div>
         <div className="body" css={style.body}>
-          <h1>{selectedPost.title}</h1>
+          <div className="header">
+            <h1>{selectedPost.title}</h1>
+            <p>{selectedPost.author}</p>
+          </div>
           <img src={preview} alt="" />
-          <MarkdownView markdown={selectedPost.selftext} css={style.markdown}/>
-
+          <MarkdownView markdown={selectedPost.selftext} css={style.markdown} />
         </div>
       </div>
       <div className="comments">
-
       </div>
     </div>
   )
@@ -89,14 +76,20 @@ const style = {
     img{
       width: 100%;
     }
-    h1{
+    .header{
       margin-bottom: 1.6rem;
+      p{
+        color: #4F87CE;
+      }
+    }
+    h1{
       font-size: 2.4rem;
     }
   `,
   markdown: css`
     *{
       margin: 1.6rem 0;
+      line-height: 1.5;
     }
     li{
       font-size: 1.6rem;

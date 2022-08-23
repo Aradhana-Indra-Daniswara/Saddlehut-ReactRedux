@@ -1,20 +1,11 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts, selectAllPosts } from '../../features/posts/postsSlice';
 import { PostCard } from '../PostCard/Postcard';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { CreateButton } from '../Button/ButtonStyles';
 import plus_icon from '../../assets/img/plus_icon.svg'
 
-function Home() {
-  const dispatch = useDispatch();
-  const posts = useSelector(selectAllPosts)
-  useEffect(() => {
-    if(!posts.length){
-      dispatch(fetchPosts());
-    }
-  }, [dispatch, posts])
+function Home({posts}) {
+
   return (
     <div className="container" css={style.container}>
       <CreateButton css={style.createbutton}>

@@ -47,5 +47,9 @@ export const selectAllPosts = state => {
   return state.posts.posts;
 }
 
+export const allPostsLoaded = state => {
+  return state.posts.posts.length === 0 ? false : true;
+}
+
 export default postsSlice.reducer;
 export const { addPost } = postsSlice.actions;
