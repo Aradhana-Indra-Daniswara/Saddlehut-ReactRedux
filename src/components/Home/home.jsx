@@ -38,14 +38,15 @@ function Home({posts}) {
 
 const style = {
   container: css`
-        display: flex;
-        flex-direction: column;
-        gap: 2.4rem;
-        width: min-content;
-        margin: auto auto;
-    `,
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    width: min-content;
+    margin: auto auto;
+  `,
   createbutton: css`
-        width: max-content;
-    `
+    width: max-content;
+    box-shadow: 2px 2px 10px #E6E6E6;
+  `
 }
 export default Home;

@@ -66,7 +66,7 @@ const style = {
     width: 100%;
     margin: 1.6rem;
     & > p{
-        margin-bottom: 1.6rem;
+      margin-bottom: 1.6rem;
     }
     `,
   author: css`
