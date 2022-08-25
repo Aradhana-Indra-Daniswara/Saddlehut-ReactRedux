@@ -2,14 +2,16 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import ShortUniqueId from "short-unique-id";
 import { addPost } from '../features/posts/postsSlice';
+import { useNavigate } from "react-router-dom";
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 function CreatePostform() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const author = "AradhanaIndraDaniswara";
   const [title, setTitle] = useState('');
   const [thumbnail, setThumbnail] = useState();
   const [description, setDescription] = useState('');
-  const dispatch = useDispatch();
   const uid = new ShortUniqueId({ length: 6 });
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,22 +20,24 @@ function CreatePostform() {
         id: uid(),
         author,
         title,
-        preview: {
-          images: [
-            {
-              source: {
-                url: thumbnail
-              }
-            }
-          ]
-        },
         selftext: description,
         ups: 0,
         downs: 0
       }
     }
-    console.log(newPost)
+    if (thumbnail) {
+      newPost.preview = {
+        images: [
+          {
+            source: {
+              url: thumbnail
+            }
+          }
+        ]
+      }
+    }
     dispatch(addPost(newPost));
+    navigate('/')
   }
 
   return (
