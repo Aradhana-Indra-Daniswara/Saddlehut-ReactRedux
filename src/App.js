@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import Post from './components/Post/Post';
@@ -7,14 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectAllPosts, fetchPosts, allPostsLoaded } from './features/posts/postsSlice';
 
 import './app.css'
+import CreatePostform from './components/CreatePostForm';
 function App() {
   const dispatch = useDispatch();
   let postIsLoaded = useSelector(allPostsLoaded);
-  if(!postIsLoaded){
+  if (!postIsLoaded) {
     dispatch(fetchPosts());
   }
   const posts = useSelector(selectAllPosts)
-
   return (
     <div className="App">
       <Navbar />
@@ -22,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home posts={posts} />} />
           <Route path="/post/:postId" element={<Post posts={posts} />} />
+          <Route path="/createPost" element={<CreatePostform />} />
         </Routes>
       ) : <h1>Loading...</h1>}
     </div>

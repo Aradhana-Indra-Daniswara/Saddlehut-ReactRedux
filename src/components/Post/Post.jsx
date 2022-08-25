@@ -18,9 +18,10 @@ function Post({ posts }) {
     )
   }
   // Find Post
+  console.log(posts);
   let preview = null;
   const selectedPost = posts.find(post => post.data.id === postId).data
-  if (selectedPost.preview != undefined) {
+  if (selectedPost.preview !== undefined) {
     const previewImage = selectedPost.preview.images[0].source.url;
     preview = previewImage.replaceAll('&amp;', '&')
   }

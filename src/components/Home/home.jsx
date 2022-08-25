@@ -3,15 +3,18 @@ import { PostCard } from '../PostCard/Postcard';
 import { css } from '@emotion/react'
 import { CreateButton } from '../Button/ButtonStyles';
 import plus_icon from '../../assets/img/plus_icon.svg'
+import { NavLink } from 'react-router-dom';
 
-function Home({posts}) {
+function Home({ posts }) {
 
   return (
     <div className="container" css={style.container}>
-      <CreateButton css={style.createbutton}>
-        <img src={plus_icon} alt="" />
-        <p>Create Post</p>
-      </CreateButton>
+      <NavLink to={'/createPost'}>
+        <CreateButton css={style.createbutton}>
+          <img src={plus_icon} alt="" />
+          <p>Create Post</p>
+        </CreateButton>
+      </NavLink>
       {
         posts.map((post) => {
           const title = post.data.title.slice(0, 50);

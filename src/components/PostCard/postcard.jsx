@@ -42,7 +42,6 @@ export function PostCard(props) {
           </NavLink>
         </div>
       </div>
-
     </div>
   )
 }
