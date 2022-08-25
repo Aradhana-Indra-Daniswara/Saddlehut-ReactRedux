@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import ShortUniqueId from "short-unique-id";
 import { addPost } from '../features/posts/postsSlice';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
 function CreatePostform() {
   const author = "AradhanaIndraDaniswara";
   const [title, setTitle] = useState('');
@@ -35,8 +37,8 @@ function CreatePostform() {
   }
 
   return (
-    <div className="container">
-      <h1>Create Post</h1>
+    <div className="container" css={style.container}>
+      <h1 className="title">Create Post</h1>
       <div className="input">
         <p>Title</p>
         <input type="text" name="" id="" onChange={(e) => { setTitle(e.target.value) }} />
@@ -58,5 +60,33 @@ function CreatePostform() {
     </div>
   )
 }
+const style = {
+  container: css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80rem;
+    margin: auto;
+    .title{
+      font-size: 3.2rem;
+      margin-bottom: 1.8rem;
 
+    }
+    .input{
+      margin-bottom: 1.6rem;
+    }
+    input{
+      width: 50rem;
+      padding: 0.8rem 1.6rem;
+    }
+
+    button{
+      border: 0;
+      padding: 1.2rem 2.4rem;
+      border-radius: 4px;
+      background-color: #4F87CE;
+      color: #FCFCFC;
+    }
+  `,
+}
 export default CreatePostform;
