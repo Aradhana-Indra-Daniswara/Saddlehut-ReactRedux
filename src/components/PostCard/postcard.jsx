@@ -53,11 +53,11 @@ const style = {
 
     overflow: hidden;
     h1{
-        font-size: 2.8rem;
-        width: 100%;
+      font-size: 2.8rem;
+      width: 100%;
     }
     & > img{
-        width: 100%;
+      width: 100%;
     }
     `,
   detail: css`
@@ -83,6 +83,10 @@ const style = {
     img{
       height: 100%;
       cursor: pointer;
+      filter: contrast(0%) opacity(40%);
+    }
+    img:hover{
+      filter: none;
     }
     `,
   comments: css`
