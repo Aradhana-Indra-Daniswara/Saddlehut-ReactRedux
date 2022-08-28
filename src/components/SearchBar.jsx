@@ -17,7 +17,7 @@ const style = {
     width: 72.5rem;
     display: flex;
     padding: 0 3.6rem;
-
+    box-shadow: 2px 2px 10px #E6E6E6;
     input{
       width: 100%;
       border: 0;
@@ -26,7 +26,6 @@ const style = {
       font-family: Inter;
       font-size: 1.6rem;
     }
-    box-shadow: 2px 2px 10px #E6E6E6;
     
   `
 }
