@@ -21,6 +21,7 @@ const style = {
     input{
       width: 100%;
       border: 0;
+      outline: 0;
       padding: 2.4rem;
       font-family: Inter;
       font-size: 1.6rem;
