@@ -39,7 +39,7 @@ function CreatePostform() {
     dispatch(addPost(newPost));
     navigate('/')
   }
-
+  
   return (
     <div className="container" css={style.container}>
       <h1 className="title">Create Post</h1>

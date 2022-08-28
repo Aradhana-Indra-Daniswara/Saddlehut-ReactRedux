@@ -14,12 +14,19 @@ function App() {
     dispatch(fetchPosts());
   }
   const posts = useSelector(selectAllPosts)
+  
+  const filterPosts = (searchTerm) => {
+    if(!searchTerm || searchTerm.length === 0){
+      return posts;
+    }
+    return posts.filter(post => post.data.title.toLowerCase().includes(searchTerm.toLowerCase()))
+  }
   return (
     <div className="App">
       <Navbar />
       {postIsLoaded ? (
         <Routes>
-          <Route path="/" element={<Home posts={posts} />} />
+          <Route path="/" element={<Home posts={posts} filterPosts={filterPosts} />} />
           <Route path="/post/:postId" element={<Post posts={posts} />} />
           <Route path="/createPost" element={<CreatePostform />} />
         </Routes>

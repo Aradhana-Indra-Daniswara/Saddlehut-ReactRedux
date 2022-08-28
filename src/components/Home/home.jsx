@@ -4,11 +4,16 @@ import { css } from '@emotion/react'
 import { CreateButton } from '../Button/ButtonStyles';
 import plus_icon from '../../assets/img/plus_icon.svg'
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import SearchBar from '../SearchBar';
 
-function Home({ posts }) {
+function Home({ posts, filterPosts }) {
+  const [searchTerm, setSearchTerm] = useState();
+  posts = filterPosts(searchTerm);
 
   return (
     <div className="container" css={style.container}>
+      <SearchBar value={searchTerm} onSearchChange={setSearchTerm} />
       <NavLink to={'/createPost'}>
         <CreateButton css={style.createbutton}>
           <img src={plus_icon} alt="" />

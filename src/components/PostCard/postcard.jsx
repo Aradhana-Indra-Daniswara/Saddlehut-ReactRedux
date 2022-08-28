@@ -5,7 +5,6 @@ import upvote_icon from "../../assets/img/upvote.svg";
 import downvote_icon from "../../assets/img/downvote.svg";
 import comments_icon from "../../assets/img/comments.svg";
 import post_default from "../../assets/img/post_default.png";
-
 import { NavLink } from "react-router-dom";
 
 export function PostCard(props) {
@@ -82,8 +81,8 @@ const style = {
     height: 2.8rem;
     align-items: center;
     img{
-        height: 100%;
-        cursor: pointer;
+      height: 100%;
+      cursor: pointer;
     }
     `,
   comments: css`
