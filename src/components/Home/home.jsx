@@ -36,6 +36,7 @@ function Home({ posts, filterPosts }) {
             upvotes={post.data.ups - post.data.downs}
             commentsAmount={post.data.num_comments}
             id={post.data.id}
+            voteStatus={post.data.voteStatus}
           />
         })
       }

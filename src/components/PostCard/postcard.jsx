@@ -32,9 +32,9 @@ export function PostCard(props) {
         <p css={style.author}>{author}</p>
         <div className="interactions" css={style.interactions}>
           <div className="upvotes" css={style.upvotes}>
-            <img src={upvote_icon} alt="" onClick={upvote} />
+            <img src={upvote_icon} alt="" onClick={upvote} id={props.voteStatus === 'upvoted' ? 'selected' : undefined}/>
             <p>{upvotes}</p>
-            <img src={downvote_icon} alt="" onClick={downvote} />
+            <img src={downvote_icon} alt="" onClick={downvote} id={props.voteStatus === 'downvoted' ? 'selected' : undefined} />
           </div>
           <NavLink to={`/post/${id}`}>
             <div className="comments" css={style.comments}>
@@ -88,9 +88,10 @@ const style = {
       cursor: pointer;
       filter: contrast(0%) opacity(40%);
     }
-    img:hover{
+    img:hover, img#selected{
       filter: none;
     }
+    
     `,
   comments: css`
     display: flex;
@@ -99,7 +100,7 @@ const style = {
     width: max-content;
     height: 2.8rem;
     img{
-        height: 100%;
+      height: 100%;
     }
   `
 }
