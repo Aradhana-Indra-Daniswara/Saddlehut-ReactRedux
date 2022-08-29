@@ -26,13 +26,20 @@ function Post({ posts }) {
     preview = previewImage.replaceAll('&amp;', '&')
   }
 
+  const upvote = () => {
+    dispatch({ type: 'posts/toggleUpvote', payload: { id: selectedPost.id } });
+  }
+  const downvote = () => {
+    dispatch({ type: 'posts/toggleDownvote', payload: { id: selectedPost.id } });
+  }
+
   return (
     <div className="container" css={style.container}>
       <div className="post" css={style.post}>
         <div className="upvotes" css={style.upvotes}>
-          <img src={upvote_icon} alt="" />
+          <img src={upvote_icon} alt="" onClick={upvote} id={selectedPost.voteStatus === 'upvoted' ? 'selected' : undefined} />
           <p>{selectedPost.ups - selectedPost.downs}</p>
-          <img src={downvote_icon} alt="" />
+          <img src={downvote_icon} alt="" onClick={downvote} id={selectedPost.voteStatus === 'downvoted' ? 'selected' : undefined} />
         </div>
         <div className="body" css={style.body}>
           <div className="header">
@@ -62,6 +69,10 @@ const style = {
     img{
       height: 2.4rem;
       cursor: pointer;
+      filter: contrast(0%) opacity(40%);
+    }
+    img:hover, img#selected{
+      filter: none;
     }
   `,
   post: css`
