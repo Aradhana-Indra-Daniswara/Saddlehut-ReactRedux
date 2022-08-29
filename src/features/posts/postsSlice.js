@@ -24,7 +24,47 @@ const postsSlice = createSlice({
   reducers: {
     addPost: (state, action) => {
       state.posts = [action.payload, ...state.posts]
-    }
+    },
+    toggleUpvote: (state, action) => {
+      state.posts = state.posts.map(post => {
+        if (post.data.id === action.payload.id) {
+          if (!post.data.voteStatus) {
+            post.data.voteStatus = 'upvoted';
+            post.data.ups = post.data.ups + 1;
+          }
+          else if (post.data.voteStatus === 'downvoted') {
+            post.data.voteStatus = 'upvoted';
+            post.data.ups = post.data.ups + 1;
+            post.data.downs = post.data.downs - 1;
+          }
+          else if (post.data.voteStatus === 'upvoted') {
+            post.data.voteStatus = undefined;
+            post.data.ups = post.data.ups - 1;
+          }
+        }
+        return post;
+      })
+    },
+    toggleDownvote: (state, action) => {
+      state.posts = state.posts.map(post => {
+        if (post.data.id === action.payload.id) {
+          if (!post.data.voteStatus) {
+            post.data.voteStatus = 'downvoted';
+            post.data.downs = post.data.downs + 1;
+          }
+          else if (post.data.voteStatus === 'upvoted') {
+            post.data.voteStatus = 'downvoted';
+            post.data.downs = post.data.downs + 1;
+            post.data.ups = post.data.ups - 1;
+          }
+          else if (post.data.voteStatus === 'downvoted') {
+            post.data.voteStatus = undefined;
+            post.data.downs = post.data.downs - 1;
+          }
+        }
+        return post;
+      })
+    },
   },
   extraReducers: {
     [fetchPosts.pending]: (state, action) => {
@@ -52,4 +92,4 @@ export const allPostsLoaded = state => {
 }
 
 export default postsSlice.reducer;
-export const { addPost } = postsSlice.actions;
+export const { addPost, toggleDownvote, toggleUpvote } = postsSlice.actions;

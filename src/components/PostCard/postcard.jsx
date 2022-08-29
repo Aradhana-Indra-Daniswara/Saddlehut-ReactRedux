@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import upvote_icon from "../../assets/img/upvote.svg";
@@ -6,19 +6,22 @@ import downvote_icon from "../../assets/img/downvote.svg";
 import comments_icon from "../../assets/img/comments.svg";
 import post_default from "../../assets/img/post_default.png";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 
 export function PostCard(props) {
+  const dispatch = useDispatch();
   const thumbnail = props.thumbnail || post_default;
   const id = props.id;
   const title = props.title;
   const author = props.author;
-  const [upvotes, setUpvotes] = useState(props.upvotes || 0);
+  const upvotes = props.upvotes || 0;
   const commentsAmount = props.commentsAmount || 0;
   const upvote = () => {
-    setUpvotes((prev) => prev + 1);
+    dispatch({ type: 'posts/toggleUpvote', payload: { id: id } });
   }
   const downvote = () => {
-    setUpvotes((prev) => prev - 1);
+    dispatch({ type: 'posts/toggleDownvote', payload: { id: id } });
   }
 
   return (

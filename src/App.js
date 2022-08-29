@@ -14,9 +14,9 @@ function App() {
     dispatch(fetchPosts());
   }
   const posts = useSelector(selectAllPosts)
-  
+
   const filterPosts = (searchTerm) => {
-    if(!searchTerm || searchTerm.length === 0){
+    if (!searchTerm || searchTerm.length === 0) {
       return posts;
     }
     return posts.filter(post => post.data.title.toLowerCase().includes(searchTerm.toLowerCase()) || post.data.author.toLowerCase().includes(searchTerm.toLowerCase()))

@@ -9,7 +9,7 @@ import SearchBar from '../SearchBar';
 
 function Home({ posts, filterPosts }) {
   const [searchTerm, setSearchTerm] = useState();
-  posts = filterPosts(searchTerm);
+  posts = filterPosts(searchTerm); 
 
   return (
     <div className="container" css={style.container}>
